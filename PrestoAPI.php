@@ -1,66 +1,48 @@
 <?php
 
 /**
- * @package PrestoAPI
+ * @link              https://prestoapi.com/
+ * @since             1.0.0
+ * @package           PrestoAPI
+ *
+ * @wordpress-plugin
+ * Plugin Name:       PrestoAPI
+ * Plugin URI:        https://github.com/3nomDev/PrestoAPI-Plugin
+ * Description:       Database connector for PrestoAPI
+ * Version:           1.0.0
+ * Author:            Andrew Samole
+ * Author URI:        https://github.com/asamole
+ * License:           GPL-3.0
+ * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
  */
-/* 
-Plugin Name: PrestoAPI
-Plugin URI: https://prestoapi.com
-Description: Database connector for PrestoAPI
-Version: 1.0.0
-Author: Andrew Samole
-License: GPLv2 or later
-Text Domain: prestoapi 
-*/
-/*
-    Copyright (C) 2020  Andrew Samole
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see <https://www.gnu.org/licenses/>.
-    For any questions or concerns, contact andrew@prestoapi.com.
-*/
-// require_once('wp-config.php');
-
-
-// if (!defined('ABSPATH')) {
-//     die;
-// }
-
-class PrestoAPI
-{
-    function activate()
-    {
-        echo 'The plugin was activated';
-    }
-    function deactivate()
-    {
-        echo 'The plugin was deactivated';
-    }
-    function uninstall()
-    {
-        echo 'The plugin was uninstalled';
-    }
-    function add_front_page()
-    {
-        include_once("form.php");
-    }
+// If this file is called directly, abort.
+if (!defined('WPINC')) {
+	die;
 }
-if (class_exists('PrestoAPI'))
-    $prestoAPI = new PrestoAPI();
 
-// activation
-// register_activation_hook(__FILE__, array($prestoAPI, 'activate'));
-//  deactivation
-// register_deactivation_hook(__FILE__, array($prestoAPI, 'activate'));
-// uninstall
-// register_uninstall_hook(__FILE__, array($prestoAPI, 'uninstall'));
+define('PLUGIN_VERSION', '1.0.0');
+
+/**
+ * The core plugin class that is used to define internationalization,
+ * admin-specific hooks, and public-facing site hooks.
+ */
+require plugin_dir_path(__FILE__) . 'includes/class-prestoapi.php';
+
+/**
+ * Begins execution of the plugin.
+ *
+ * Since everything within the plugin is registered via hooks,
+ * then kicking off the plugin from this point in the file does
+ * not affect the page life cycle.
+ *
+ * @since    1.0.0
+ */
+function run_PrestoAPI()
+{
+
+	$plugin = new PrestoAPI();
+	$plugin->run();
+}
+
+run_PrestoAPI();
